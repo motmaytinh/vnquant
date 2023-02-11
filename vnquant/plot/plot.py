@@ -241,6 +241,7 @@ def vnquant_candle_stick(data,
                           width=800, height=600,
                           data_source='VND',
                           show_advanced=['volume', 'macd', 'rsi'],
+                          annotations=[],
                           **kargs):
     '''
     This function is to visualize a candle stick stock index with advanced metrics
@@ -256,6 +257,7 @@ def vnquant_candle_stick(data,
         height (int: 600): height of graph figure
         data_source (string: 'VND'): data source to get stock price belonging to ['VND', 'CAFE']
         show_advanced (list: ['volume', 'macd', 'rsi']): list of advanced stock index to show up. Each element belongs to ['volume', 'macd', 'rsi'] 
+        annotations: (list: []): list of annotations to show on the candlestick chart
         
     Example:
         from vnquant import plot as pl
@@ -308,6 +310,10 @@ def vnquant_candle_stick(data,
             increasing_line_color=colors[0],
             decreasing_line_color=colors[1]),
             row=1, col=1)
+
+        if annotations:
+            for annotation in annotations:
+                fig.add_annotation(**annotation)
 
         if 'volume' in show_advanced:
             fig.append_trace(go.Bar(
